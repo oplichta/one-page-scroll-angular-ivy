@@ -1,0 +1,16 @@
+{
+  "hosting": {
+    "public": "dist/one-page-scroll",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
+    "rewrites": [
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
+    ]
+  }
+}
