@@ -1,8 +1,32 @@
+<div class="table">
+  <div class="cell">
+    <ul class="dots">
+      <li id='dot-one'
+        [ngClass]="dotActive('one')"><a href="#"
+          (click)="scrollToPanel('one')">One</a></li>
+      <li id='dot-two'
+        [ngClass]="dotActive('two')"><a href="#"
+          (click)="scrollToPanel('two')">Two</a></li>
+      <li id='dot-three'
+        [ngClass]="dotActive('three')"><a href="#"
+          (click)="scrollToPanel('three')">Three</a></li>
+      <li id='dot-four'
+        [ngClass]="dotActive('four')"><a href="#"
+          (click)="scrollToPanel('four')">Four</a>
+      </li>
+    </ul>
+  </div>
+</div>
+
 <div class="well"
   id="well"
   [style.transform]="'translateY(' + length + 'vh)'">
-  <app-one class="panel"></app-one>
-  <app-two class="panel"></app-two>
-  <app-three class="panel"></app-three>
-  <app-four class="panel"></app-four>
+  <app-one class="panel"
+    id="one"></app-one>
+  <app-two class="panel"
+    id="two"></app-two>
+  <app-three class="panel"
+    id="three"></app-three>
+  <app-four class="panel"
+    id="four"></app-four>
 </div>

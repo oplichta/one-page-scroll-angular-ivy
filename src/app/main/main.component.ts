@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { fromEvent, Subscription, Observable } from 'rxjs';
-import { Router } from '@angular/router';
+import { Router, ActivationEnd } from '@angular/router';
 
 @Component({
   selector: 'app-main',
@@ -19,10 +19,12 @@ export class MainComponent implements OnInit, OnDestroy {
     stT: new Date().getTime(),
   };
 
-  constructor(private router: Router) {
+  constructor() {
     this.subscribeToScrollEvent();
   }
-  ngOnInit() {}
+  ngOnInit() {
+    this.scrollToPanel('one');
+  }
 
   ngOnDestroy() {
     if (this.touchStartEventSubscription) {
@@ -34,6 +36,31 @@ export class MainComponent implements OnInit, OnDestroy {
     if (this.touchEndEventSubscription) {
       this.touchEndEventSubscription.unsubscribe();
     }
+  }
+
+  public dotActive(id: string) {
+    if (id === 'one' && this.length === 0) {
+      return 'active';
+    } else if (id === 'two' && this.length === -100) {
+      return 'active';
+    } else if (id === 'three' && this.length === -200) {
+      return 'active';
+    } else if (id === 'four' && this.length === -300) {
+      return 'active';
+    } else {
+      return 'inactive';
+    }
+  }
+
+  public scrollToPanel(id: string) {
+    const panelsObj = {
+      one: 0,
+      two: -100,
+      three: -200,
+      four: -300,
+    };
+
+    this.length = panelsObj[id];
   }
 
   private subscribeToScrollEvent() {
@@ -85,12 +112,14 @@ export class MainComponent implements OnInit, OnDestroy {
             this.length -= step;
           } else if (swdir === 'down' && this.length < 0) {
             this.length += step;
+          } else {
+            this.scrollToPanel('one');
           }
         }
       }
     );
 
-    this.scrollEventSubscription = fromEvent(document, 'mousewheel').subscribe(
+    this.scrollEventSubscription = fromEvent(document, 'wheel').subscribe(
       (e: any) => {
         if (hold === false) {
           const step = 100;
@@ -98,9 +127,10 @@ export class MainComponent implements OnInit, OnDestroy {
           hold = true;
           if (e.deltaY < 0 && this.length < 0) {
             this.length += step;
-          }
-          if (e.deltaY > 0 && this.length > -300) {
+          } else if (e.deltaY > 0 && this.length > -300) {
             this.length -= step;
+          } else {
+            this.scrollToPanel('one');
           }
 
           setTimeout(() => {
