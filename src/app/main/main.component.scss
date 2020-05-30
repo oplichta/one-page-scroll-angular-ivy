@@ -1,0 +1,50 @@
+@mixin flex-center {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.well {
+  @include flex-center;
+  overflow: hidden;
+  transition: 1s cubic-bezier(0.5, 0, 0.5, 1);
+}
+
+.panel {
+  @include flex-center;
+  height: 100vh;
+  width: 100%;
+  overflow: hidden;
+  font-size: 20px;
+  padding: 1em;
+  box-sizing: border-box;
+  color: whitesmoke;
+}
+
+#one {
+  @include flex-center;
+  background: #fb1d1d;
+}
+
+#two {
+  @include flex-center;
+  background: #3194f6;
+}
+
+#three {
+  @include flex-center;
+  background: #40f121;
+}
+
+#four {
+  @include flex-center;
+  background: #0059fd;
+}
+
+.nav-items {
+  width: 75%;
+  position: fixed;
+  left: 50%;
+  margin-left: -37.5%;
+}
